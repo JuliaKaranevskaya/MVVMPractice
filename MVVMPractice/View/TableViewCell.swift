@@ -10,6 +10,14 @@ import UIKit
 class TableViewCell: UITableViewCell {
     
     static let identifier = "TableViewCell"
+    
+    weak var viewModel: TableViewCellViewModelType? {
+        willSet(viewModel) {
+            guard let viewModel = viewModel else { return }
+            planeLabel.text = viewModel.destination
+            priceLabel.text = viewModel.price
+        }
+    }
 
     let planeLabel: UILabel = {
         let label = UILabel()
@@ -38,19 +46,19 @@ class TableViewCell: UITableViewCell {
     private func addPlaneLabel() {
         contentView.addSubview(planeLabel)
         planeLabel.translatesAutoresizingMaskIntoConstraints = false
-        planeLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        planeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30).isActive = true
         planeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
         planeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        planeLabel.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        planeLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
     
     private func addPriceLabel() {
         contentView.addSubview(priceLabel)
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.topAnchor.constraint(equalTo: planeLabel.bottomAnchor, constant: 10).isActive = true
+        priceLabel.topAnchor.constraint(equalTo: planeLabel.bottomAnchor).isActive = true
         priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
         priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        priceLabel.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        priceLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
     
 }
